@@ -16,7 +16,7 @@
             @if($dayClickEnabled)
                 wire:click="onDayClick({{ $day->year }}, {{ $day->month }}, {{ $day->day }})"
             @endif
-            class="w-full h-full p-2 {{ $dayInMonth ? $isToday ? 'bg-yellow-100 dark:bg-secondary-400' : ' bg-gray-100 dark:bg-gray-500' : 'bg-gray-100 dark:bg-gray-600' }} flex flex-col">
+            class="w-full h-full p-2 {{ $dayInMonth ? $isToday ? 'bg-yellow-100 dark:bg-secondary-400' : ' bg-gray-100 dark:bg-gray-500' : 'bg-gray-300 dark:bg-gray-600' }} flex flex-col">
 
             {{-- Number of Day --}}
             <div class="flex items-center">
