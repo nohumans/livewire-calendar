@@ -20,7 +20,7 @@
 
             {{-- Number of Day --}}
             <div class="flex items-center">
-                <p class="text-sm {{ $dayInMonth ? ' font-extrabold ' : '' }}">
+                <p class="text-xl {{ $dayInMonth ? ' font-extrabold ' : '' }}">
                     {{ $day->format('j') }}
                 </p>
                 {{--

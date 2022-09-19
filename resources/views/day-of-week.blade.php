@@ -2,7 +2,7 @@
      style="min-width: 10rem;">
 
     <p class="text-lg">
-        {{ $day->format('l') }}
+          {{ $day->isoformat('dddd') }}
     </p>
 
 </div>
