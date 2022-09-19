@@ -66,23 +66,24 @@ class LivewireCalendar extends Component
         'gridEndsAt' => 'date',
     ];
 
-    public function mount($initialYear = null,
-                          $initialMonth = null,
-                          $weekStartsAt = null,
-                          $calendarView = null,
-                          $dayView = null,
-                          $eventView = null,
-                          $dayOfWeekView = null,
-                          $dragAndDropClasses = null,
-                          $beforeCalendarView = null,
-                          $afterCalendarView = null,
-                          $pollMillis = null,
-                          $pollAction = null,
-                          $dragAndDropEnabled = true,
-                          $dayClickEnabled = true,
-                          $eventClickEnabled = true,
-                          $extras = [])
-    {
+    public function mount(
+        $initialYear = null,
+        $initialMonth = null,
+        $weekStartsAt = null,
+        $calendarView = null,
+        $dayView = null,
+        $eventView = null,
+        $dayOfWeekView = null,
+        $dragAndDropClasses = null,
+        $beforeCalendarView = null,
+        $afterCalendarView = null,
+        $pollMillis = null,
+        $pollAction = null,
+        $dragAndDropEnabled = true,
+        $dayClickEnabled = true,
+        $eventClickEnabled = true,
+        $extras = []
+    ) {
         $this->weekStartsAt = $weekStartsAt ?? Carbon::SUNDAY;
         $this->weekEndsAt = $this->weekStartsAt == Carbon::SUNDAY
             ? Carbon::SATURDAY
@@ -115,13 +116,14 @@ class LivewireCalendar extends Component
         //
     }
 
-    public function setupViews($calendarView = null,
-                               $dayView = null,
-                               $eventView = null,
-                               $dayOfWeekView = null,
-                               $beforeCalendarView = null,
-                               $afterCalendarView = null)
-    {
+    public function setupViews(
+        $calendarView = null,
+        $dayView = null,
+        $eventView = null,
+        $dayOfWeekView = null,
+        $beforeCalendarView = null,
+        $afterCalendarView = null
+    ) {
         $this->calendarView = $calendarView ?? 'livewire-calendar::calendar';
         $this->dayView = $dayView ?? 'livewire-calendar::day';
         $this->eventView = $eventView ?? 'livewire-calendar::event';
@@ -140,24 +142,25 @@ class LivewireCalendar extends Component
     public function goToPreviousMonth()
     {
         $this->startsAt->subMonthNoOverflow();
-        $this->endsAt->subMonthNoOverflow();
-
+        //$this->endsAt->subMonthNoOverflow();
+        $this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
+        
         $this->calculateGridStartsEnds();
     }
 
     public function goToNextMonth()
     {
         $this->startsAt->addMonthNoOverflow();
-        $this->endsAt->addMonthNoOverflow();
-
+        //$this->endsAt->addMonthNoOverflow();
+        $this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
         $this->calculateGridStartsEnds();
     }
 
     public function goToCurrentMonth()
     {
         $this->startsAt = Carbon::today()->startOfMonth()->startOfDay();
+        //$this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
         $this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
-
         $this->calculateGridStartsEnds();
     }
 
@@ -185,7 +188,7 @@ class LivewireCalendar extends Component
         $monthGrid = collect();
         $currentDay = $firstDayOfGrid->clone();
 
-        while(!$currentDay->greaterThan($lastDayOfGrid)) {
+        while (!$currentDay->greaterThan($lastDayOfGrid)) {
             $monthGrid->push($currentDay->clone());
             $currentDay->addDay();
         }

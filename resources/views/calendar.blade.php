@@ -10,7 +10,7 @@
     </div>
 
     <div class="flex">
-        <div class="overflow-x-auto w-full">
+         <div class="overflow-x-auto scroll-smooth scroll-pl-6 snap-x w-full">
             <div class="inline-block min-w-full overflow-hidden">
 
                 <div class="w-full flex flex-row">
